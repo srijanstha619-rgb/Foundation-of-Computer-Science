@@ -294,3 +294,6 @@ The database is now fully normalized (3NF):
 The College Club Membership database was successfully transformed from an unnormalized structure into a fully normalized design (1NF → 3NF).  
 
 This improves efficiency, consistency, and scalability of the database system.
+
+Author: Srijan Shrestha
+Bachelor of Cybersecurity and Ethical Hacking
