@@ -64,7 +64,7 @@ CREATE TABLE DATA (
 );
 
 
-
+'''
 INSERT INTO DATA (StudentID, StudentName, Email, ClubName, ClubRoom, ClubMentor, JoinDate) VALUES
 (1, 'Asha', 'asha@email.com', 'Music Club', 'R101', 'Mr. Raman', '2024-01-10'),
 (2, 'Bikash', 'bikash@email.com', 'Sports Club', 'R202', 'Ms. Sita', '2024-01-12'),
@@ -76,7 +76,8 @@ INSERT INTO DATA (StudentID, StudentName, Email, ClubName, ClubRoom, ClubMentor,
 (6, 'Pooja', 'pooja@email.com', 'Sports Club', 'R202', 'Ms. Sita', '2024-01-27'),
 (3, 'Nisha', 'nisha@email.com', 'Coding Club', 'Lab1', 'Mr. Anil', '2024-01-28'),
 (7, 'Aman', 'aman@email.com', 'Coding Club', 'Lab1', 'Mr. Anil', '2024-01-30');
-
+'''
+'''
 +-----------+-------------+------------------+-------------+----------+------------+------------+
 | StudentID | StudentName | Email            | ClubName    | ClubRoom | ClubMentor | JoinDate   |
 +-----------+-------------+------------------+-------------+----------+------------+------------+
@@ -91,20 +92,25 @@ INSERT INTO DATA (StudentID, StudentName, Email, ClubName, ClubRoom, ClubMentor,
 |         6 | Pooja       | pooja@email.com  | Sports Club | R202     | Ms. Sita   | 2024-01-27 |
 |         7 | Aman        | aman@email.com   | Coding Club | Lab1     | Mr. Anil   | 2024-01-30 |
 +-----------+-------------+------------------+-------------+----------+------------+------------+
-
+'''
+'''
 CREATE TABLE Student (
     StudentID INT PRIMARY KEY,
     StudentName VARCHAR(50),
     Email VARCHAR(50)
 );
+'''
 
+'''
 CREATE TABLE Club (
     ClubID INT PRIMARY KEY,
     ClubName VARCHAR(50),
     ClubRoom VARCHAR(50),
     ClubMentor VARCHAR(50)
 );
+'''
 
+'''
 CREATE TABLE Membership (
     StudentID INT,
     ClubID INT,
@@ -113,14 +119,23 @@ CREATE TABLE Membership (
     FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
     FOREIGN KEY (ClubID) REFERENCES Club(ClubID)
 );
+'''
 
+'''
 INSERT INTO Student VALUES
 (8, 'Srijan', 'srijan@email.com');
+'''
 
+'''
 INSERT INTO Club VALUES
 (5, 'Hacking Club', 'R699', 'Ms. Piya');
+'''
 
+'''
 SELECT * FROM Student;
+'''
+
+'''
 +-----------+-------------+------------------+
 | StudentID | StudentName | Email            |
 +-----------+-------------+------------------+
@@ -132,8 +147,13 @@ SELECT * FROM Student;
 |         6 | Pooja       | pooja@email.com  |
 |         7 | Aman        | aman@email.com   |
 +-----------+-------------+------------------+
+'''
 
+'''
 SELECT * FROM Club;
+'''
+
+'''
 +--------+-------------+----------+------------+
 | ClubID | ClubName    | ClubRoom | ClubMentor |
 +--------+-------------+----------+------------+
@@ -142,8 +162,13 @@ SELECT * FROM Club;
 |    303 | Drama Club  | R303     | Mr. Kiran  |
 |    401 | Coding Club | Lab1     | Mr. Anil   |
 +--------+-------------+----------+------------+
+'''
 
+'''
 SELECT * FROM Membership;
+'''
+
+'''
 +--------------+-----------+--------+------------+
 | MembershipID | StudentID | ClubID | JoinDate   |
 +--------------+-----------+--------+------------+
@@ -158,12 +183,17 @@ SELECT * FROM Membership;
 |            9 |         3 |    401 | 2024-01-28 |
 |           10 |         7 |    401 | 2024-01-30 |
 +--------------+-----------+--------+------------+
+'''
 
+'''
 SELECT s.StudentName, c.ClubName, m.JoinDate
 FROM Membership m
 JOIN Student s ON m.StudentID = s.StudentID
 JOIN Club c ON m.ClubID = c.ClubID;
     -> JOIN Club c ON sc.ClubID = c.ClubID;
+'''
+
+'''
 +-------------+-------------+------------+
 | StudentName | ClubName    | JoinDate   |
 +-------------+-------------+------------+
@@ -178,4 +208,4 @@ JOIN Club c ON m.ClubID = c.ClubID;
 | Nisha       | Coding Club | 2024-01-28 |
 | Aman        | Coding Club | 2024-01-30 |
 +-------------+-------------+------------+
-
+'''
