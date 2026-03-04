@@ -296,4 +296,5 @@ The College Club Membership database was successfully transformed from an unnorm
 This improves efficiency, consistency, and scalability of the database system.
 
 Author: Srijan Shrestha
+
 Bachelor of Cybersecurity and Ethical Hacking
