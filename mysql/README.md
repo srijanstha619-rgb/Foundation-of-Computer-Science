@@ -51,7 +51,7 @@ This table stores *Student + Club + Membership* information together in one tabl
 
 # Step 1: Create Unnormalized Table (1NF)
 
-'''sql
+```sql
 CREATE TABLE DATA (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     StudentID INT,
@@ -62,7 +62,7 @@ CREATE TABLE DATA (
     ClubMentor VARCHAR(50),
     JoinDate DATE
 );
-'''
+```
 
 
 ### Insert Sample Data
