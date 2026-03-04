@@ -67,7 +67,7 @@ CREATE TABLE DATA (
 
 ### Insert Sample Data
 
-sql
+```sql
 INSERT INTO DATA (StudentID, StudentName, Email, ClubName, ClubRoom, ClubMentor, JoinDate) VALUES
 (1, 'Asha', 'asha@email.com', 'Music Club', 'R101', 'Mr. Raman', '2024-01-10'),
 (2, 'Bikash', 'bikash@email.com', 'Sports Club', 'R202', 'Ms. Sita', '2024-01-12'),
@@ -79,7 +79,7 @@ INSERT INTO DATA (StudentID, StudentName, Email, ClubName, ClubRoom, ClubMentor,
 (6, 'Pooja', 'pooja@email.com', 'Sports Club', 'R202', 'Ms. Sita', '2024-01-27'),
 (3, 'Nisha', 'nisha@email.com', 'Coding Club', 'Lab1', 'Mr. Anil', '2024-01-28'),
 (7, 'Aman', 'aman@email.com', 'Coding Club', 'Lab1', 'Mr. Anil', '2024-01-30');
-
+```
 
 ---
 
@@ -95,32 +95,33 @@ The large table is divided into three smaller related tables:
 
 ## Student Table
 
-sql
+```sql
 CREATE TABLE Student (
     StudentID INT PRIMARY KEY,
     StudentName VARCHAR(50),
     Email VARCHAR(50)
 );
+```
 
 
 ---
 
 ## Club Table
 
-sql
+```sql
 CREATE TABLE Club (
     ClubID INT PRIMARY KEY,
     ClubName VARCHAR(50),
     ClubRoom VARCHAR(50),
     ClubMentor VARCHAR(50)
 );
-
+```
 
 ---
 
 ## Membership Table
 
-sql
+```sql
 CREATE TABLE Membership (
     StudentID INT,
     ClubID INT,
@@ -129,7 +130,7 @@ CREATE TABLE Membership (
     FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
     FOREIGN KEY (ClubID) REFERENCES Club(ClubID)
 );
-
+```
 
 ---
 
@@ -137,7 +138,7 @@ CREATE TABLE Membership (
 
 ### Insert Students
 
-sql
+```sql
 INSERT INTO Student VALUES
 (1, 'Asha', 'asha@email.com'),
 (2, 'Bikash', 'bikash@email.com'),
@@ -146,25 +147,25 @@ INSERT INTO Student VALUES
 (5, 'Suman', 'suman@email.com'),
 (6, 'Pooja', 'pooja@email.com'),
 (7, 'Aman', 'aman@email.com');
-
+```
 
 ---
 
 ### Insert Clubs
 
-sql
+```sql
 INSERT INTO Club VALUES
 (101, 'Music Club', 'R101', 'Mr. Raman'),
 (202, 'Sports Club', 'R202', 'Ms. Sita'),
 (303, 'Drama Club', 'R303', 'Mr. Kiran'),
 (401, 'Coding Club', 'Lab1', 'Mr. Anil');
-
+```
 
 ---
 
 ### Insert Membership Records
 
-sql
+```sql
 INSERT INTO Membership VALUES
 (1, 101, '2024-01-10'),
 (2, 202, '2024-01-12'),
@@ -176,28 +177,28 @@ INSERT INTO Membership VALUES
 (6, 202, '2024-01-27'),
 (3, 401, '2024-01-28'),
 (7, 401, '2024-01-30');
-
+```
 
 ---
 
 # Display Data
 
-sql
+```sql
 SELECT * FROM Student;
 SELECT * FROM Club;
 SELECT * FROM Membership;
-
+```
 
 ---
 
 # Join Tables to View Final Result
 
-sql
+```sql
 SELECT s.StudentName, c.ClubName, m.JoinDate
 FROM Membership m
 JOIN Student s ON m.StudentID = s.StudentID
 JOIN Club c ON m.ClubID = c.ClubID;
-
+```
 
 ---
 
