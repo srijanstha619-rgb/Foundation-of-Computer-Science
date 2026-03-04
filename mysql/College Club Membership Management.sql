@@ -1,6 +1,7 @@
-Creating Database
-
+-- Creating Database
 create database srijan;
+-- Using database
+use srijan;
 -- 1NF: One big table with atomic values
 CREATE TABLE ClubMembership_1NF (
     StudentID INT,
