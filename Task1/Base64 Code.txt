@@ -1,0 +1,99 @@
+# First Command
+C:\Windows\System32>docker network create srijan
+5b4a7906e5ad2f21e4da779fb44881d53df3add6d1d20625a0e961022ccf47a5
+
+C:\Windows\System32>docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+77d2c7e33577   bridge    bridge    local
+937cfa2b011c   host      host      local
+1b096a716ef2   none      null      local
+47a23189c73a   record    bridge    local
+5b4a7906e5ad   srijan    bridge    local
+
+
+C:\Windows\System32>docker run -it --name hello --network srijan  python:3.12-slim bash
+root@6656071548e3:/# apt update
+Hit:1 http://deb.debian.org/debian trixie InRelease
+Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9670 kB]
+Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [108 kB]
+Fetched 9875 kB in 3s (3565 kB/s)
+All packages are up to date.
+root@6656071548e3:/# apt install -y wget iputils-ping
+Installing:
+  iputils-ping  wget
+
+Installing dependencies:
+  libgnutls30t64  libp11-kit0  libtasn1-6     linux-sysctl-defaults
+  libidn2-0       libpsl5t64   libunistring5  publicsuffix
+
+root@6656071548e3:/# echo "Founfation of computer science">fou.txt
+root@6656071548e3:/# ls
+bin   dev  fou.txt  lib    media  opt   root  sbin  sys  usr
+boot  etc  home     lib64  mnt    proc  run   srv   tmp  var
+root@6656071548e3:/# base64 fou.txt>encoded.txt
+root@6656071548e3:/# cat encoded.txt
+Rm91bmZhdGlvbiBvZiBjb21wdXRlciBzY2llbmNlCg==
+root@6656071548e3:/# ^C
+root@6656071548e3:/# python -m http.server 8086
+Serving HTTP on 0.0.0.0 port 8086 (http://0.0.0.0:8086/) ...
+172.19.0.3 - - [05/Mar/2026 11:40:39] "GET /encoded.txt HTTP/1.1" 200 -
+172.19.0.3 - - [05/Mar/2026 11:41:10] "GET /encoded.txt HTTP/1.1" 200 -
+
+# Second Command
+C:\Windows\System32>docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" hello
+172.19.0.2
+
+#Third Command
+C:\Windows\System32>docker run -it --name client --network srijan python:3.12-slim bash
+root@c1541c915a2a:/# apt update
+Hit:1 http://deb.debian.org/debian trixie InRelease
+Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9670 kB]
+Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [108 kB]
+Fetched 9875 kB in 5s (2088 kB/s)
+All packages are up to date.
+root@c1541c915a2a:/# apt install -y wget inputils-ping
+Error: Unable to locate package inputils-ping
+root@c1541c915a2a:/# ping server
+bash: ping: command not found
+root@c1541c915a2a:/# ping 172.19.0.2
+bash: ping: command not found
+root@c1541c915a2a:/# ping hello
+bash: ping: command not found
+root@c1541c915a2a:/# apt install -y wget iputils-ping
+Installing:
+  iputils-ping  wget
+
+oot@c1541c915a2a:/# wget http://172.19.0.2:8086/encoded.txt
+--2026-03-05 11:40:39--  http://172.19.0.2:8086/encoded.txt
+Connecting to 172.19.0.2:8086... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 45 [text/plain]
+Saving to: ‘encoded.txt’
+
+encoded.txt               100%[=====================================>]      45  --.-KB/s    in 0s
+
+2026-03-05 11:40:39 (6.51 MB/s) - ‘encoded.txt’ saved [45/45]
+
+root@c1541c915a2a:/# ls
+bin   dev          etc   lib    media  opt   root  sbin  sys  usr
+boot  encoded.txt  home  lib64  mnt    proc  run   srv   tmp  var
+root@c1541c915a2a:/# wget http://172.19.0.2:8086/encoded.txt
+--2026-03-05 11:41:10--  http://172.19.0.2:8086/encoded.txt
+Connecting to 172.19.0.2:8086... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 45 [text/plain]
+Saving to: ‘encoded.txt.1’
+
+encoded.txt.1             100%[=====================================>]      45  --.-KB/s    in 0s
+
+2026-03-05 11:41:10 (3.09 MB/s) - ‘encoded.txt.1’ saved [45/45]
+
+root@c1541c915a2a:/# base64 -d encoded.txt>decoded.txt
+root@c1541c915a2a:/# cat decoded.txt
+Founfation of computer science
