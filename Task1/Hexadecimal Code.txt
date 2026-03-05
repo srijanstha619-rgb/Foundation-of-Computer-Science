@@ -1,0 +1,36 @@
+def string_to_hex(input_string):
+    """
+    Convert a string to its hexadecimal representation.
+    """
+    hex_output = input_string.encode('utf-8').hex()
+    return hex_output
+
+def hex_to_string(hex_input):
+    """
+    Convert a hexadecimal string back to normal string.
+    """
+    try:
+        bytes_object = bytes.fromhex(hex_input)
+        decoded_string = bytes_object.decode('utf-8')
+        return decoded_string
+    except ValueError:
+        return "Invalid hexadecimal input!"
+def main():
+    print("Hexadecimal Encoder & Decoder")
+    print("----------------------------")
+    
+    choice = input("Choose an option (1-Encode, 2-Decode): ").strip()   
+    if choice == '1':
+        user_string = input("Enter the string to encode: ")
+        hex_result = string_to_hex(user_string)
+        print(f"Hexadecimal: {hex_result}")
+    
+    elif choice == '2':
+        hex_string = input("Enter the hexadecimal string to decode: ")
+        string_result = hex_to_string(hex_string)
+        print(f"Decoded string: {string_result}") 
+    else:
+        print("Invalid option. Please choose 1 or 2.")
+
+if __name__ == "__main__":
+    main()
