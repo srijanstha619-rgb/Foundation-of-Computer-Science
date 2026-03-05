@@ -1,0 +1,20 @@
+# Sample text
+text = "Cyber123"
+
+print("Original Text:")
+print(text)
+print("-" * 40)
+
+# ASCII Encoding
+ascii_encoded = text.encode("ascii")
+print("ASCII Encoded (bytes):", ascii_encoded)
+
+ascii_numbers = list(ascii_encoded)
+print("ASCII Values:", ascii_numbers)
+
+print("-" * 40)
+
+
+# ASCII Decoding
+ascii_decoded = ascii_encoded.decode("ascii")
+print("ASCII Decoded:", ascii_decoded)
