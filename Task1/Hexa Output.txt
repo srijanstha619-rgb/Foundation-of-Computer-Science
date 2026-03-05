@@ -1,0 +1,20 @@
+Choose an option:
+1. Encode Text to Hex
+2. Decode Hex to Text
+3. Exit
+Enter your choice (1/2/3): 1
+Enter text to encode: srijan
+
+--- Hexadecimal Analysis ---
+Original Text: srijan
+Hex Encoded : 7372696a616e
+
+Character to Hex Mapping:
+'s' → 73
+'r' → 72
+'i' → 69
+'j' → 6a
+'a' → 61
+'n' → 6e
+
+Decoded Text : srijan
