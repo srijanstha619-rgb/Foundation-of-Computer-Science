@@ -1,0 +1,7 @@
+Original Text:
+Cyber123
+----------------------------------------
+ASCII Encoded (bytes): b'Cyber123'
+ASCII Values: [67, 121, 98, 101, 114, 49, 50, 51]
+----------------------------------------
+ASCII Decoded: Cyber123
