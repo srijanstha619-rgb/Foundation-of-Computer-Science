@@ -106,12 +106,16 @@ User Options
 Example Interaction
 
 Encoding
+```
 Enter the string to encode: Cyber123
 Hexadecimal: 4379626572313233
+```
 
 Decoding
+```
 Enter the hexadecimal string to decode: 4379626572313233
 Decoded string: Cyber123
+```
 
 Summary
 
