@@ -57,30 +57,163 @@ Decoded: Hello
 
 ---
 
-## Base64 Encoding
+#  Base64 Encoding
 
-Base64 converts **binary data into ASCII text**, making it suitable for text-based protocols.
+##  Objective
 
-### Python Example
+To demonstrate encoding of data before transmission and decoding after reception using two Docker containers connected via a custom network.
 
-```python
-import base64
+---
 
-data = "Hello World"
+##  Step 1 – Create Docker Network
 
-encoded = base64.b64encode(data.encode())
-decoded = base64.b64decode(encoded)
-
-print("Encoded:", encoded)
-print("Decoded:", decoded.decode())
+```bash
+docker network create blue
+docker network ls
 ```
 
-### Output
+---
+
+##  Step 2 – Start Server Container
+
+```bash
+docker run -it --name server --network blue python:3.12-slim bash
+```
+
+---
+
+##  Step 3 – Install Required Packages (Server)
+
+```bash
+apt update
+apt install -y wget iputils-ping
+```
+
+---
+
+##  Step 4 – Create Original File (Server)
+
+```bash
+echo "This is secret data for Base64 Demo" > dem.txt
+ls
+```
+
+---
+
+##  Step 5 – Encode File Using Base64 (Server)
+
+```bash
+base64 dem.txt > encoded.txt
+cat encoded.txt
+```
+
+Example encoded output:
 
 ```
-Encoded: b'SGVsbG8gV29ybGQ='
-Decoded: Hello World
+VGhpcyBpcyBzZWNyZXQgZGF0YSBmb3IgQmFzZTY0IERlbW8K
 ```
+
+---
+
+##  Step 6 – Check Server IP (Windows CMD)
+
+```bash
+docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" server
+```
+
+Example output:
+
+```
+172.18.0.2
+```
+
+---
+
+##  Step 7 – Start HTTP Server (Server)
+
+```bash
+python -m http.server 8082
+```
+
+---
+
+##  Step 8 – Start Client Container
+
+(Open new CMD window)
+
+```bash
+docker run -it --name client --network blue python:3.12-slim bash
+```
+
+---
+
+##  Step 9 – Install Packages (Client)
+
+```bash
+apt update
+apt install -y wget iputils-ping
+```
+
+---
+
+##  Step 10 – Test Network Connectivity (Client)
+
+Using container name:
+
+```bash
+ping server
+```
+
+Using IP address:
+
+```bash
+ping 172.18.0.2
+```
+
+---
+
+##  Step 11 – Download Encoded File (Client)
+
+Using hostname:
+
+```bash
+wget http://server:8082/encoded.txt
+```
+
+Using IP:
+
+```bash
+wget http://172.18.0.2:8082/encoded.txt
+```
+
+---
+
+##  Step 12 – Decode File (Client)
+
+```bash
+base64 -d encoded.txt > decoded.txt
+cat decoded.txt
+```
+
+Expected output:
+
+```
+This is secret data for Base64 Demo
+```
+
+---
+
+##  What Task 1 Demonstrates
+
+- Docker networking  
+- Container-to-container communication  
+- DNS resolution within Docker  
+- Base64 encoding before transmission  
+- File transfer via HTTP  
+- Decoding after reception  
+- Difference between HTTP and HTTPS  
+
+---
 
 ---
 
@@ -313,10 +446,9 @@ Student 1 --- * Membership * --- 1 Club
 
 ---
 
-#  Task 3 – Database Normalisation (1NF to 3NF)
+#  3.3 Database Normalisation (1NF to 3NF)
 
-##  Module: Foundation of Computer Science  
-##  Topic: Database Design and Normalisation  
+
 
 ---
 
