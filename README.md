@@ -313,48 +313,128 @@ Student 1 --- * Membership * --- 1 Club
 
 ---
 
-# 3.3 SQL Operations
+#  Task 3 – Database Normalisation (1NF to 3NF)
 
-### Insert Student
+##  Module: Foundation of Computer Science  
+##  Topic: Database Design and Normalisation  
+
+---
+
+#  Overview
+
+Task 3 demonstrates the process of database normalisation from:
+
+- First Normal Form (1NF)  
+- Second Normal Form (2NF)  
+- Third Normal Form (3NF)  
+
+The goal is to remove redundancy, eliminate partial dependencies, and ensure proper relational database structure using primary and foreign keys.
+
+---
+
+#  Step 1 – First Normal Form (1NF)
+
+In 1NF, all values must be atomic (no repeating groups).
 
 ```sql
-INSERT INTO Student (StudentID, StudentName, Email)
-VALUES (9,'Mello','mello@email.com');
+CREATE TABLE ClubMembership_1NF (
+    StudentID INT,
+    StudentName VARCHAR(50),
+    Email VARCHAR(50),
+    ClubName VARCHAR(50),
+    ClubRoom VARCHAR(50),
+    ClubMentor VARCHAR(50),
+    JoinDate DATE,
+    PRIMARY KEY (StudentID, ClubName, JoinDate)
+);
+
+SELECT * FROM ClubMembership_1NF;
 ```
 
-### Insert Club
+###  Explanation
+
+- Data is stored in one single table.
+- Composite primary key: `(StudentID, ClubName, JoinDate)`
+- Still contains redundancy.
+- Student and club details repeat multiple times.
+
+---
+
+#  Step 2 – Second Normal Form (2NF)
+
+To achieve 2NF:
+- Remove partial dependencies.
+- Separate student and club information into different tables.
+
+## Create Student Table
 
 ```sql
-INSERT INTO Club
-VALUES (502,'Hacking Club','R669','Ms.Sita');
+CREATE TABLE Student (
+    StudentID INT PRIMARY KEY,
+    StudentName VARCHAR(50),
+    Email VARCHAR(50)
+);
 ```
 
-### View Data
+## Create Club Table
+
+```sql
+CREATE TABLE Club (
+    ClubID INT PRIMARY KEY,
+    ClubName VARCHAR(50),
+    ClubRoom VARCHAR(50),
+    ClubMentor VARCHAR(50)
+);
+```
+
+## Create Membership Table
+
+```sql
+CREATE TABLE Membership (
+    MembershipID INT PRIMARY KEY AUTO_INCREMENT,
+    StudentID INT,
+    ClubID INT,
+    JoinDate DATE,
+    FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
+    FOREIGN KEY (ClubID) REFERENCES Club(ClubID)
+);
+```
+
+## View Tables
 
 ```sql
 SELECT * FROM Student;
 SELECT * FROM Club;
+SELECT * FROM Membership;
 ```
 
-### Example Output
+###  Explanation
 
-```
-Student Table
-
-StudentID | StudentName | Email
--------------------------------------
-9         | Mello       | mello@email.com
-```
-
-```
-Club Table
-
-ClubID | ClubName      | ClubRoom | ClubMentor
-------------------------------------------------
-502    | Hacking Club  | R669     | Ms.Sita
-```
+- Student data stored separately.
+- Club data stored separately.
+- Membership table connects Student and Club.
+- Foreign keys enforce referential integrity.
+- Redundancy reduced significantly.
 
 ---
+
+#  Step 3 – Third Normal Form (3NF)
+
+To achieve 3NF:
+- Remove transitive dependencies.
+- Ensure non-key attributes depend only on the primary key.
+
+```sql
+CREATE TABLE StudentClub_3NF (
+    StudentClubID INT PRIMARY KEY AUTO_INCREMENT,
+    StudentID INT,
+    ClubID INT,
+    JoinDate DATE,
+    FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
+    FOREIGN KEY (ClubID) REFERENCES Club(ClubID)
+);
+```
+
 
 # 3.4 SQL JOIN Query
 
