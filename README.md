@@ -68,7 +68,7 @@ To demonstrate encoding of data before transmission and decoding after reception
 ##  Step 1 – Create Docker Network
 
 ```bash
-docker network create blue
+docker network create srijan
 docker network ls
 ```
 
@@ -77,7 +77,7 @@ docker network ls
 ##  Step 2 – Start Server Container
 
 ```bash
-docker run -it --name server --network blue python:3.12-slim bash
+docker run -it --name hello --network srijan python:3.12-slim bash
 ```
 
 ---
@@ -94,7 +94,7 @@ apt install -y wget iputils-ping
 ##  Step 4 – Create Original File (Server)
 
 ```bash
-echo "This is secret data for Base64 Demo" > dem.txt
+echo "Founfation of computer science" > fou.txt
 ls
 ```
 
@@ -103,7 +103,7 @@ ls
 ##  Step 5 – Encode File Using Base64 (Server)
 
 ```bash
-base64 dem.txt > encoded.txt
+base64 fou.txt > encoded.txt
 cat encoded.txt
 ```
 
@@ -118,13 +118,13 @@ VGhpcyBpcyBzZWNyZXQgZGF0YSBmb3IgQmFzZTY0IERlbW8K
 ##  Step 6 – Check Server IP (Windows CMD)
 
 ```bash
-docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" server
+docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" hello
 ```
 
 Example output:
 
 ```
-172.18.0.2
+172.19.0.2
 ```
 
 ---
@@ -132,7 +132,7 @@ Example output:
 ##  Step 7 – Start HTTP Server (Server)
 
 ```bash
-python -m http.server 8082
+python -m http.server 8086
 ```
 
 ---
@@ -142,7 +142,7 @@ python -m http.server 8082
 (Open new CMD window)
 
 ```bash
-docker run -it --name client --network blue python:3.12-slim bash
+docker run -it --name client --network srijan python:3.12-slim bash
 ```
 
 ---
@@ -167,7 +167,7 @@ ping server
 Using IP address:
 
 ```bash
-ping 172.18.0.2
+ping 172.19.0.2
 ```
 
 ---
@@ -177,13 +177,13 @@ ping 172.18.0.2
 Using hostname:
 
 ```bash
-wget http://server:8082/encoded.txt
+wget http://server:8086/encoded.txt
 ```
 
 Using IP:
 
 ```bash
-wget http://172.18.0.2:8082/encoded.txt
+wget http://172.19.0.2:8086/encoded.txt
 ```
 
 ---
@@ -201,19 +201,7 @@ Expected output:
 This is secret data for Base64 Demo
 ```
 
----
 
-##  What Task 1 Demonstrates
-
-- Docker networking  
-- Container-to-container communication  
-- DNS resolution within Docker  
-- Base64 encoding before transmission  
-- File transfer via HTTP  
-- Decoding after reception  
-- Difference between HTTP and HTTPS  
-
----
 
 ---
 
