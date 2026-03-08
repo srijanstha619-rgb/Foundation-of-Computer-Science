@@ -1,11 +1,19 @@
 
+#  Overview
+
+This coursework demonstrates practical implementation of:
+
+- Docker containerisation and environment isolation
+- Docker bridge networking for container-to-container communication
+- Client–Server architecture implementation
+- ASCII and Base64 encoding for data representation and transmission
+- File transfer using the HTTP protocol
+- Communication between containers using IP addresses and container hostnames
+- Understanding the differences between HTTP and HTTPS protocols
+- Database normalization from First Normal Form (1NF) to Third Normal Form (3NF)
+
+
 ---
-
-# Abstract
-
-This project explores fundamental computing concepts including **secure data exchange, computational complexity, and database normalization**.
-
-The project explains encoding formats such as **ASCII, Base64, URL Encoding, and Hexadecimal**, and their role in protocols like **HTTPS, TLS, REST APIs, and OAuth**. It also analyzes a **classroom seating arrangement problem** to demonstrate **P vs NP complexity**, comparing brute-force and heuristic solutions. Finally, it demonstrates **database normalization** using a **College Club Membership system** with ER modeling and SQL queries.
 
 ---
 
