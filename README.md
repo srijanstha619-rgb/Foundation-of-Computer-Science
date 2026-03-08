@@ -408,37 +408,7 @@ Original table stores student and club information together causing:
 
 ---
 
-# 3.2 Normalized Database Structure
 
-## ER Diagram
-
-```
-Student
---------
-StudentID (PK)
-StudentName
-Email
-
-Club
---------
-ClubID (PK)
-ClubName
-ClubRoom
-ClubMentor
-
-Membership
---------
-MembershipID (PK)
-StudentID (FK)
-ClubID (FK)
-JoinDate
-```
-
-Relationship:
-
-```
-Student 1 --- * Membership * --- 1 Club
-```
 
 ---
 
